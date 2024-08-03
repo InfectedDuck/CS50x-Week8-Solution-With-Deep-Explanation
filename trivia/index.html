@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>Capital city of Kazakhstan?</h3>
+                <ul class="list_of_buttons">
+                    <li><button class="answer" onclick="checkbutans('incorrect',this)">Nur-Sultan</button></li>
+                    <li><button class="answer" onclick="checkbutans('correct',this)">Astana</button></li>
+                    <li><button class="answer" onclick="checkbutans('incorrect',this)">NurSultan</button></li>
+                    <li><button class="answer" onclick="checkbutans('incorrect',this)">Akmola</button></li>
+                    <li><button class="answer" onclick="checkbutans('incorrect',this)">Almaty</button></li>
+                    <li><button class="answer" onclick="checkbutans('incorrect',this)">Capital</button></li>
+                </ul>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>Who is the author of The path of Abai?</h3>
+                <input type='text' id='response'>
+                <button class="ans" onclick="checktextans()">Submit</button>
+                <p id="part2res"></p>
+            </div>
+        </div>
+    </body>
+    <script>
+        function checkbutans(answer,button){
+            clearPreviousResults();
+            const result=document.createElement('p');
+            if (answer==="correct"){
+                button.classList.add("Correct");
+                result.textContent="Correct!";
+            }else{
+                button.classList.add("Incorrect");
+                result.textContent='Incorrect!';
+            }
+            button.parentNode.appendChild(result);
+        }
+        function clearPreviousResults(){
+            const buttons=document.querySelectorAll(".answer");
+            buttons.forEach(button => {
+                button.classList.remove('Incorrect','Correct');
+                const siblingRes = button.parentNode.querySelector('p.feedback');
+                if (siblingRes)
+                {
+                    siblingRes.remove();
+                }
+            });
+        }
+        function checktextans()
+        {
+            const input=document.getElementById('response');
+            const result=document.getElementById('part2res');
+            result.InnerHtml='';
+            if (input.value.trim().toLowerCase()==='mukhtar auezov'){
+                input.classList.add('Correct');
+                input.classList.remove('Incorrect');
+                result.textContent='Correct!';
+            }else{
+                input.classList.add('Incorrect');
+                input.classList.remove('Correct');
+                result.textContent='Incorrect!';
+            }
+        }
+    </script>
+</html>
